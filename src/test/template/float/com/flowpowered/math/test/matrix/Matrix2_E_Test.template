@@ -9,7 +9,7 @@ import com.flowpowered.math.matrix.Matrix3#E#;
 import com.flowpowered.math.matrix.Matrix4#E#;
 import com.flowpowered.math.matrix.MatrixN#E#;
 import com.flowpowered.math.test.TestUtil#E#;
-import com.flowpowered.math.vector.Vector2#E#;
+import com.flowpowered.math.vector.Vec2#E#;
 
 import static com.flowpowered.math.test.TestUtil#E#.SQRT13;
 
@@ -164,8 +164,8 @@ public class Matrix2#E#Test {
     }
 
     @Test
-    public void testScaleVector2() {
-        Matrix2#E# matrix = new Matrix2#E#(1, 0, 0, 1).scale(new Vector2#E#(2, 3));
+    public void testScaleVec2() {
+        Matrix2#E# matrix = new Matrix2#E#(1, 0, 0, 1).scale(new Vec2#E#(2, 3));
         TestUtil#E#.assertEquals(matrix, 2, 0, 0, 3);
     }
 
@@ -188,20 +188,20 @@ public class Matrix2#E#Test {
     }
 
     @Test
-    public void testTransformVector2() {
-        Vector2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(new Vector2#E#(3, 1));
+    public void testTransformVec2() {
+        Vec2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(new Vec2#E#(3, 1));
         TestUtil#E#.assertEquals(vector, 10, 1);
     }
 
     @Test
     public void testTransformDoubleComponents() {
-        Vector2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(3d, 1d);
+        Vec2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(3d, 1d);
         TestUtil#E#.assertEquals(vector, 10, 1);
     }
 
     @Test
     public void testTransformFloatComponents() {
-        Vector2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(3, 1);
+        Vec2#E# vector = new Matrix2#E#(1, 0, 0, 1).scale(2, 1).translate(4).transform(3, 1);
         TestUtil#E#.assertEquals(vector, 10, 1);
     }
 
@@ -337,8 +337,8 @@ public class Matrix2#E#Test {
     }
 
     @Test
-    public void testCreateFromScalingVector2() {
-        Matrix2#E# matrix = Matrix2#E#.createScaling(new Vector2#E#(2, 1.5));
+    public void testCreateFromScalingVec2() {
+        Matrix2#E# matrix = Matrix2#E#.createScaling(new Vec2#E#(2, 1.5));
         TestUtil#E#.assertEquals(matrix, 2, 0, 0, (#e#) 1.5);
     }
 

@@ -6,7 +6,7 @@ import java.lang.Override;
 import com.flowpowered.math.GenericMath;
 import com.flowpowered.math.HashFunctions;
 import com.flowpowered.math.imaginary.Complex#E#;
-import com.flowpowered.math.vector.Vector2#E#;
+import com.flowpowered.math.vector.Vec2#E#;
 
 public class Matrix2#E# implements Matrix#E#, Serializable, Cloneable {
     private static final long serialVersionUID = 1;
@@ -90,13 +90,13 @@ public class Matrix2#E# implements Matrix#E#, Serializable, Cloneable {
     }
 
     @Override
-    public Vector2#E# getRow(int row) {
-        return new Vector2#E#(get(row, 0), get(row, 1));
+    public Vec2#E# getRow(int row) {
+        return new Vec2#E#(get(row, 0), get(row, 1));
     }
 
     @Override
-    public Vector2#E# getColumn(int col) {
-        return new Vector2#E#(get(0, col), get(1, col));
+    public Vec2#E# getColumn(int col) {
+        return new Vec2#E#(get(0, col), get(1, col));
     }
 
     public Matrix2#E# add(Matrix2#E# m) {
@@ -170,7 +170,7 @@ public class Matrix2#E# implements Matrix#E#, Serializable, Cloneable {
         return scale(scale, scale);
     }
 
-    public Matrix2#E# scale(Vector2#E# v) {
+    public Matrix2#E# scale(Vec2#E# v) {
         return scale(v.getX(), v.getY());
     }
 
@@ -186,16 +186,16 @@ public class Matrix2#E# implements Matrix#E#, Serializable, Cloneable {
         return createRotation(rot).mul(this);
     }
 
-    public Vector2#E# transform(Vector2#E# v) {
+    public Vec2#E# transform(Vec2#E# v) {
         return transform(v.getX(), v.getY());
     }
 
-    public Vector2#E# transform(#EOverload# x, #EOverload# y) {
+    public Vec2#E# transform(#EOverload# x, #EOverload# y) {
         return transform((#e#) x, (#e#) y);
     }
 
-    public Vector2#E# transform(#e# x, #e# y) {
-        return new Vector2#E#(
+    public Vec2#E# transform(#e# x, #e# y) {
+        return new Vec2#E#(
                 m00 * x + m01 * y,
                 m10 * x + m11 * y);
     }
@@ -370,7 +370,7 @@ public class Matrix2#E# implements Matrix#E#, Serializable, Cloneable {
         return createScaling(scale, scale);
     }
 
-    public static Matrix2#E# createScaling(Vector2#E# v) {
+    public static Matrix2#E# createScaling(Vec2#E# v) {
         return createScaling(v.getX(), v.getY());
     }
 

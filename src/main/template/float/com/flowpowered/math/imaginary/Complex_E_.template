@@ -6,8 +6,8 @@ import java.lang.Override;
 import com.flowpowered.math.GenericMath;
 import com.flowpowered.math.HashFunctions;
 import com.flowpowered.math.TrigMath;
-import com.flowpowered.math.vector.Vector2#E#;
-import com.flowpowered.math.vector.Vector3#E#;
+import com.flowpowered.math.vector.Vec2#E#;
+import com.flowpowered.math.vector.Vec3#E#;
 
 /**
  * Represent a complex number of the form <code>x + yi</code>. The x and y components are stored as #e#s. This class is immutable.
@@ -296,7 +296,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param v The vector to rotate
      * @return The rotated vector
      */
-    public Vector2#E# rotate(Vector2#E# v) {
+    public Vec2#E# rotate(Vec2#E# v) {
         return rotate(v.getX(), v.getY());
     }
 
@@ -307,7 +307,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param y The y component of the vector
      * @return The rotated vector
      */
-    public Vector2#E# rotate(#EOverload# x, #EOverload# y) {
+    public Vec2#E# rotate(#EOverload# x, #EOverload# y) {
         return rotate((#e#) x, (#e#) y);
     }
 
@@ -318,14 +318,14 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param y The y component of the vector
      * @return The rotated vector
      */
-    public Vector2#E# rotate(#e# x, #e# y) {
+    public Vec2#E# rotate(#e# x, #e# y) {
         final #e# length = length();
         if (Math.abs(length) < #Eeps#) {
             throw new ArithmeticException("Cannot rotate by the zero complex");
         }
         final #e# nx = this.x / length;
         final #e# ny = this.y / length;
-        return new Vector2#E#(x * nx - y * ny, y * nx + x * ny);
+        return new Vec2#E#(x * nx - y * ny, y * nx + x * ny);
     }
 
     /**
@@ -333,8 +333,8 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      *
      * @return The vector representing the direction this complex is pointing to
      */
-    public Vector2#E# getDirection() {
-        return new Vector2#E#(x, y).normalize();
+    public Vec2#E# getDirection() {
+        return new Vec2#E#(x, y).normalize();
     }
 
     /**
@@ -423,7 +423,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @return A quaternion of this rotation around the unit z
      */
     public Quaternion#E# toQuaternion() {
-        return toQuaternion(Vector3#E#.UNIT_Z);
+        return toQuaternion(Vec3#E#.UNIT_Z);
     }
 
     /**
@@ -433,7 +433,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param axis The rotation axis
      * @return A quaternion of this rotation around the given axis
      */
-    public Quaternion#E# toQuaternion(Vector3#E# axis) {
+    public Quaternion#E# toQuaternion(Vec3#E# axis) {
         return toQuaternion(axis.getX(), axis.getY(), axis.getZ());
     }
 
@@ -562,7 +562,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param to The second vector
      * @return The complex defined by the angle between the vectors
      */
-    public static Complex#E# fromRotationTo(Vector2#E# from, Vector2#E# to) {
+    public static Complex#E# fromRotationTo(Vec2#E# from, Vec2#E# to) {
         return fromAngleRad(TrigMath.acos(from.dot(to) / (from.length() * to.length())));
     }
 
@@ -573,7 +573,7 @@ public class Complex#E# implements Imaginary#E#, Comparable<Complex#E#>, Seriali
      * @param to The second vector
      * @return The complex defined by the angle between the vectors
      */
-    public static Complex#E# fromRotationTo(Vector3#E# from, Vector3#E# to) {
+    public static Complex#E# fromRotationTo(Vec3#E# from, Vec3#E# to) {
         return fromAngleRad(TrigMath.acos(from.dot(to) / (from.length() * to.length())));
     }
 

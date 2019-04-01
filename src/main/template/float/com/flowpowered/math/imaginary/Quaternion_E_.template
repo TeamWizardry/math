@@ -6,7 +6,7 @@ import com.flowpowered.math.GenericMath;
 import com.flowpowered.math.HashFunctions;
 import com.flowpowered.math.TrigMath;
 import com.flowpowered.math.matrix.Matrix3#E#;
-import com.flowpowered.math.vector.Vector3#E#;
+import com.flowpowered.math.vector.Vec3#E#;
 
 /**
  * Represent a quaternion of the form <code>xi + yj + zk + w</code>. The x, y, z and w components are stored as #e#s. This class is immutable.
@@ -344,7 +344,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param v The vector to rotate
      * @return The rotated vector
      */
-    public Vector3#E# rotate(Vector3#E# v) {
+    public Vec3#E# rotate(Vec3#E# v) {
         return rotate(v.getX(), v.getY(), v.getZ());
     }
 
@@ -356,7 +356,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param z The z component of the vector
      * @return The rotated vector
      */
-    public Vector3#E# rotate(#EOverload# x, #EOverload# y, #EOverload# z) {
+    public Vec3#E# rotate(#EOverload# x, #EOverload# y, #EOverload# z) {
         return rotate((#e#) x, (#e#) y, (#e#) z);
     }
 
@@ -368,7 +368,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param z The z component of the vector
      * @return The rotated vector
      */
-    public Vector3#E# rotate(#e# x, #e# y, #e# z) {
+    public Vec3#E# rotate(#e# x, #e# y, #e# z) {
         final #e# length = length();
         if (Math.abs(length) < #Eeps#) {
             throw new ArithmeticException("Cannot rotate by the zero quaternion");
@@ -381,19 +381,19 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
         final #e# py = nw * y + nz * x - nx * z;
         final #e# pz = nw * z + nx * y - ny * x;
         final #e# pw = -nx * x - ny * y - nz * z;
-        return new Vector3#E#(
+        return new Vec3#E#(
                 pw * -nx + px * nw - py * nz + pz * ny,
                 pw * -ny + py * nw - pz * nx + px * nz,
                 pw * -nz + pz * nw - px * ny + py * nx);
     }
 
     /**
-     * Returns a unit vector representing the direction of this quaternion, which is {@link Vector3#E##FORWARD} rotated by this quaternion.
+     * Returns a unit vector representing the direction of this quaternion, which is {@link Vec3#E##FORWARD} rotated by this quaternion.
      *
      * @return The vector representing the direction this quaternion is pointing to
      */
-    public Vector3#E# getDirection() {
-        return rotate(Vector3#E#.FORWARD);
+    public Vec3#E# getDirection() {
+        return rotate(Vec3#E#.FORWARD);
     }
 
     /**
@@ -401,9 +401,9 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      *
      * @return The axis of rotation
      */
-    public Vector3#E# getAxis() {
+    public Vec3#E# getAxis() {
         final #e# q = (#e#) Math.sqrt(1 - w * w);
-        return new Vector3#E#(x / q, y / q, z / q);
+        return new Vec3#E#(x / q, y / q, z / q);
     }
 
     /**
@@ -411,7 +411,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      *
      * @return The angle in degrees for each axis, stored in a vector, in the corresponding component
      */
-    public Vector3#E# getAxesAnglesDeg() {
+    public Vec3#E# getAxesAnglesDeg() {
         return getAxesAnglesRad().mul(TrigMath.RAD_TO_DEG);
     }
 
@@ -420,7 +420,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      *
      * @return The angle in radians for each axis, stored in a vector, in the corresponding component
      */
-    public Vector3#E# getAxesAnglesRad() {
+    public Vec3#E# getAxesAnglesRad() {
         final double roll;
         final double pitch;
         double yaw;
@@ -435,7 +435,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
             pitch = sign * Math.PI / 2;
             yaw = -sign * 2 * TrigMath.atan2(z, w);
         }
-        return new Vector3#E#(pitch, yaw, roll);
+        return new Vec3#E#(pitch, yaw, roll);
     }
 
     /**
@@ -646,9 +646,9 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @return The quaternion defined by the rotations around the axes
      */
     public static Quaternion#E# fromAxesAnglesDeg(#e# pitch, #e# yaw, #e# roll) {
-        return Quaternion#E#.fromAngleDegAxis(yaw, Vector3#E#.UNIT_Y).
-                mul(Quaternion#E#.fromAngleDegAxis(pitch, Vector3#E#.UNIT_X)).
-                mul(Quaternion#E#.fromAngleDegAxis(roll, Vector3#E#.UNIT_Z));
+        return Quaternion#E#.fromAngleDegAxis(yaw, Vec3#E#.UNIT_Y).
+                mul(Quaternion#E#.fromAngleDegAxis(pitch, Vec3#E#.UNIT_X)).
+                mul(Quaternion#E#.fromAngleDegAxis(roll, Vec3#E#.UNIT_Z));
     }
 
     /**
@@ -660,9 +660,9 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @return The quaternion defined by the rotations around the axes
      */
     public static Quaternion#E# fromAxesAnglesRad(#e# pitch, #e# yaw, #e# roll) {
-        return Quaternion#E#.fromAngleRadAxis(yaw, Vector3#E#.UNIT_Y).
-                mul(Quaternion#E#.fromAngleRadAxis(pitch, Vector3#E#.UNIT_X)).
-                mul(Quaternion#E#.fromAngleRadAxis(roll, Vector3#E#.UNIT_Z));
+        return Quaternion#E#.fromAngleRadAxis(yaw, Vec3#E#.UNIT_Y).
+                mul(Quaternion#E#.fromAngleRadAxis(pitch, Vec3#E#.UNIT_X)).
+                mul(Quaternion#E#.fromAngleRadAxis(roll, Vec3#E#.UNIT_Z));
     }
 
     /**
@@ -672,7 +672,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param to The second vector
      * @return The quaternion defined by the angle-axis rotation between the vectors
      */
-    public static Quaternion#E# fromRotationTo(Vector3#E# from, Vector3#E# to) {
+    public static Quaternion#E# fromRotationTo(Vec3#E# from, Vec3#E# to) {
         return Quaternion#E#.fromAngleRadAxis(TrigMath.acos(from.dot(to) / (from.length() * to.length())), from.cross(to));
     }
 
@@ -683,7 +683,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param axis The axis of rotation
      * @return The quaternion defined by the rotation around the axis
      */
-    public static Quaternion#E# fromAngleDegAxis(#EOverload# angle, Vector3#E# axis) {
+    public static Quaternion#E# fromAngleDegAxis(#EOverload# angle, Vec3#E# axis) {
         return fromAngleRadAxis(Math.toRadians(angle), axis);
     }
 
@@ -694,7 +694,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param axis The axis of rotation
      * @return The quaternion defined by the rotation around the axis
      */
-    public static Quaternion#E# fromAngleRadAxis(#EOverload# angle, Vector3#E# axis) {
+    public static Quaternion#E# fromAngleRadAxis(#EOverload# angle, Vec3#E# axis) {
         return fromAngleRadAxis((#e#) angle, axis);
     }
 
@@ -705,7 +705,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param axis The axis of rotation
      * @return The quaternion defined by the rotation around the axis
      */
-    public static Quaternion#E# fromAngleDegAxis(#e# angle, Vector3#E# axis) {
+    public static Quaternion#E# fromAngleDegAxis(#e# angle, Vec3#E# axis) {
         return fromAngleRadAxis((#e#) Math.toRadians(angle), axis);
     }
 
@@ -716,7 +716,7 @@ public class Quaternion#E# implements Imaginary#E#, Comparable<Quaternion#E#>, S
      * @param axis The axis of rotation
      * @return The quaternion defined by the rotation around the axis
      */
-    public static Quaternion#E# fromAngleRadAxis(#e# angle, Vector3#E# axis) {
+    public static Quaternion#E# fromAngleRadAxis(#e# angle, Vec3#E# axis) {
         return fromAngleRadAxis(angle, axis.getX(), axis.getY(), axis.getZ());
     }
 

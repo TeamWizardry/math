@@ -6,8 +6,8 @@ import com.flowpowered.math.GenericMath;
 import com.flowpowered.math.HashFunctions;
 import com.flowpowered.math.imaginary.Complex#E#;
 import com.flowpowered.math.imaginary.Quaternion#E#;
-import com.flowpowered.math.vector.Vector2#E#;
-import com.flowpowered.math.vector.Vector3#E#;
+import com.flowpowered.math.vector.Vec2#E#;
+import com.flowpowered.math.vector.Vec3#E#;
 
 public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
     private static final long serialVersionUID = 1;
@@ -132,13 +132,13 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
     }
 
     @Override
-    public Vector3#E# getRow(int row) {
-        return new Vector3#E#(get(row, 0), get(row, 1), get(row, 2));
+    public Vec3#E# getRow(int row) {
+        return new Vec3#E#(get(row, 0), get(row, 1), get(row, 2));
     }
 
     @Override
-    public Vector3#E# getColumn(int col) {
-        return new Vector3#E#(get(0, col), get(1, col), get(2, col));
+    public Vec3#E# getColumn(int col) {
+        return new Vec3#E#(get(0, col), get(1, col), get(2, col));
     }
 
     public Matrix3#E# add(Matrix3#E# m) {
@@ -204,7 +204,7 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
                 Math.pow(m20, pow), Math.pow(m21, pow), Math.pow(m22, pow));
     }
 
-    public Matrix3#E# translate(Vector2#E# v) {
+    public Matrix3#E# translate(Vec2#E# v) {
         return translate(v.getX(), v.getY());
     }
 
@@ -224,7 +224,7 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
         return scale(scale, scale, scale);
     }
 
-    public Matrix3#E# scale(Vector3#E# v) {
+    public Matrix3#E# scale(Vec3#E# v) {
         return scale(v.getX(), v.getY(), v.getZ());
     }
 
@@ -244,16 +244,16 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
         return createRotation(rot).mul(this);
     }
 
-    public Vector3#E# transform(Vector3#E# v) {
+    public Vec3#E# transform(Vec3#E# v) {
         return transform(v.getX(), v.getY(), v.getZ());
     }
 
-    public Vector3#E# transform(#EOverload# x, #EOverload# y, #EOverload# z) {
+    public Vec3#E# transform(#EOverload# x, #EOverload# y, #EOverload# z) {
         return transform((#e#) x, (#e#) y, (#e#) z);
     }
 
-    public Vector3#E# transform(#e# x, #e# y, #e# z) {
-        return new Vector3#E#(
+    public Vec3#E# transform(#e# x, #e# y, #e# z) {
+        return new Vec3#E#(
                 m00 * x + m01 * y + m02 * z,
                 m10 * x + m11 * y + m12 * z,
                 m20 * x + m21 * y + m22 * z);
@@ -473,7 +473,7 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
         return createScaling(scale, scale, scale);
     }
 
-    public static Matrix3#E# createScaling(Vector3#E# v) {
+    public static Matrix3#E# createScaling(Vec3#E# v) {
         return createScaling(v.getX(), v.getY(), v.getZ());
     }
 
@@ -488,7 +488,7 @@ public class Matrix3#E# implements Matrix#E#, Serializable, Cloneable {
                 0, 0, z);
     }
 
-    public static Matrix3#E# createTranslation(Vector2#E# v) {
+    public static Matrix3#E# createTranslation(Vec2#E# v) {
         return createTranslation(v.getX(), v.getY());
     }
 

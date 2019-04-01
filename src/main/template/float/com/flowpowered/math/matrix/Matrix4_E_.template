@@ -7,8 +7,8 @@ import com.flowpowered.math.HashFunctions;
 import com.flowpowered.math.TrigMath;
 import com.flowpowered.math.imaginary.Complex#E#;
 import com.flowpowered.math.imaginary.Quaternion#E#;
-import com.flowpowered.math.vector.Vector3#E#;
-import com.flowpowered.math.vector.Vector4#E#;
+import com.flowpowered.math.vector.Vec3#E#;
+import com.flowpowered.math.vector.Vec4#E#;
 
 public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
     private static final long serialVersionUID = 1;
@@ -190,13 +190,13 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
     }
 
     @Override
-    public Vector4#E# getRow(int row) {
-        return new Vector4#E#(get(row, 0), get(row, 1), get(row, 2), get(row, 3));
+    public Vec4#E# getRow(int row) {
+        return new Vec4#E#(get(row, 0), get(row, 1), get(row, 2), get(row, 3));
     }
 
     @Override
-    public Vector4#E# getColumn(int col) {
-        return new Vector4#E#(get(0, col), get(1, col), get(2, col), get(3, col));
+    public Vec4#E# getColumn(int col) {
+        return new Vec4#E#(get(0, col), get(1, col), get(2, col), get(3, col));
     }
 
     public Matrix4#E# add(Matrix4#E# m) {
@@ -278,7 +278,7 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
                 Math.pow(m30, pow), Math.pow(m31, pow), Math.pow(m32, pow), Math.pow(m33, pow));
     }
 
-    public Matrix4#E# translate(Vector3#E# v) {
+    public Matrix4#E# translate(Vec3#E# v) {
         return translate(v.getX(), v.getY(), v.getZ());
     }
 
@@ -298,7 +298,7 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
         return scale(scale, scale, scale, scale);
     }
 
-    public Matrix4#E# scale(Vector4#E# v) {
+    public Matrix4#E# scale(Vec4#E# v) {
         return scale(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
@@ -318,16 +318,16 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
         return createRotation(rot).mul(this);
     }
 
-    public Vector4#E# transform(Vector4#E# v) {
+    public Vec4#E# transform(Vec4#E# v) {
         return transform(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
-    public Vector4#E# transform(#EOverload# x, #EOverload# y, #EOverload# z, #EOverload# w) {
+    public Vec4#E# transform(#EOverload# x, #EOverload# y, #EOverload# z, #EOverload# w) {
         return transform((#e#) x, (#e#) y, (#e#) z, (#e#) w);
     }
 
-    public Vector4#E# transform(#e# x, #e# y, #e# z, #e# w) {
-        return new Vector4#E#(
+    public Vec4#E# transform(#e# x, #e# y, #e# z, #e# w) {
+        return new Vec4#E#(
                 m00 * x + m01 * y + m02 * z + m03 * w,
                 m10 * x + m11 * y + m12 * z + m13 * w,
                 m20 * x + m21 * y + m22 * z + m23 * w,
@@ -603,7 +603,7 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
         return createScaling(scale, scale, scale, scale);
     }
 
-    public static Matrix4#E# createScaling(Vector4#E# v) {
+    public static Matrix4#E# createScaling(Vec4#E# v) {
         return createScaling(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
@@ -619,7 +619,7 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
                 0, 0, 0, w);
     }
 
-    public static Matrix4#E# createTranslation(Vector3#E# v) {
+    public static Matrix4#E# createTranslation(Vec3#E# v) {
         return createTranslation(v.getX(), v.getY(), v.getZ());
     }
 
@@ -667,10 +667,10 @@ public class Matrix4#E# implements Matrix#E#, Serializable, Cloneable {
      * @param up The "up" vector
      * @return A rotational transform that corresponds to a camera looking at the given point
      */
-    public static Matrix4#E# createLookAt(Vector3#E# eye, Vector3#E# at, Vector3#E# up) {
-        final Vector3#E# f = at.sub(eye).normalize();
-        final Vector3#E# s = f.cross(up).normalize();
-        final Vector3#E# u = s.cross(f);
+    public static Matrix4#E# createLookAt(Vec3#E# eye, Vec3#E# at, Vec3#E# up) {
+        final Vec3#E# f = at.sub(eye).normalize();
+        final Vec3#E# s = f.cross(up).normalize();
+        final Vec3#E# u = s.cross(f);
         final Matrix4#E# mat = new Matrix4#E#(
                 s.getX(), s.getY(), s.getZ(), 0,
                 u.getX(), u.getY(), u.getZ(), 0,

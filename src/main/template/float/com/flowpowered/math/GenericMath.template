@@ -698,7 +698,7 @@ public class GenericMath {
      * @param percent The percent
      * @return the interpolated vector
      */
-    public static Vector3#E# lerp(Vector3#E# a, Vector3#E# b, #e# percent) {
+    public static Vec3#E# lerp(Vec3#E# a, Vec3#E# b, #e# percent) {
         return a.mul(1 - percent).add(b.mul(percent));
     }
 =====END_REPLICATED_CONTENT #1=====
@@ -712,7 +712,7 @@ public class GenericMath {
      * @param percent The percent
      * @return the interpolated vector
      */
-    public static Vector2#E# lerp(Vector2#E# a, Vector2#E# b, #e# percent) {
+    public static Vec2#E# lerp(Vec2#E# a, Vec2#E# b, #e# percent) {
         return a.mul(1 - percent).add(b.mul(percent));
     }
 =====END_REPLICATED_CONTENT #2=====
@@ -781,11 +781,11 @@ public class GenericMath {
      * @param v The vector to attempt to normalize
      * @return The normalized vector, or the zero vector if it couldn't be normalized.
      */
-    public static Vector2#E# normalizeSafe(Vector2#E# v) {
+    public static Vec2#E# normalizeSafe(Vec2#E# v) {
         try {
             return v.normalize();
         } catch (ArithmeticException ex) {
-            return Vector2#E#.ZERO;
+            return Vec2#E#.ZERO;
         }
     }
 =====END_REPLICATED_CONTENT #4=====
@@ -797,11 +797,11 @@ public class GenericMath {
      * @param v The vector to attempt to normalize
      * @return The normalized vector, or the zero vector if it couldn't be normalized.
      */
-    public static Vector3#E# normalizeSafe(Vector3#E# v) {
+    public static Vec3#E# normalizeSafe(Vec3#E# v) {
         try {
             return v.normalize();
         } catch (ArithmeticException ex) {
-            return Vector3#E#.ZERO;
+            return Vec3#E#.ZERO;
         }
     }
 =====END_REPLICATED_CONTENT #5=====
@@ -813,11 +813,11 @@ public class GenericMath {
      * @param v The vector to attempt to normalize
      * @return The normalized vector, or the zero vector if it couldn't be normalized.
      */
-    public static Vector4#E# normalizeSafe(Vector4#E# v) {
+    public static Vec4#E# normalizeSafe(Vec4#E# v) {
         try {
             return v.normalize();
         } catch (ArithmeticException ex) {
-            return Vector4#E#.ZERO;
+            return Vec4#E#.ZERO;
         }
     }
 =====END_REPLICATED_CONTENT #6=====
@@ -829,11 +829,11 @@ public class GenericMath {
      * @param v The vector to attempt to normalize
      * @return The normalized vector, or the zero vector if it couldn't be normalized.
      */
-    public static VectorN#E# normalizeSafe(VectorN#E# v) {
+    public static VecN#E# normalizeSafe(VecN#E# v) {
         try {
             return v.normalize();
         } catch (ArithmeticException ex) {
-            return new VectorN#E#(v.size());
+            return new VecN#E#(v.size());
         }
     }
 =====END_REPLICATED_CONTENT #7=====

@@ -10,8 +10,8 @@ import com.flowpowered.math.matrix.Matrix3#E#;
 import com.flowpowered.math.matrix.Matrix4#E#;
 import com.flowpowered.math.matrix.MatrixN#E#;
 import com.flowpowered.math.test.TestUtil#E#;
-import com.flowpowered.math.vector.Vector2#E#;
-import com.flowpowered.math.vector.Vector3#E#;
+import com.flowpowered.math.vector.Vec2#E#;
+import com.flowpowered.math.vector.Vec3#E#;
 
 import static com.flowpowered.math.test.TestUtil#E#.SQRT13;
 
@@ -149,8 +149,8 @@ public class Matrix3#E#Test {
     }
 
     @Test
-    public void testTranslateVector2() {
-        Matrix3#E# matrix = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).translate(new Vector2#E#(1, 0));
+    public void testTranslateVec2() {
+        Matrix3#E# matrix = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).translate(new Vec2#E#(1, 0));
         TestUtil#E#.assertEquals(matrix, 1, 0, 1, 0, 1, 0, 0, 0, 1);
     }
 
@@ -179,8 +179,8 @@ public class Matrix3#E#Test {
     }
 
     @Test
-    public void testScaleVector3() {
-        Matrix3#E# matrix = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(new Vector3#E#(2, 3, 4));
+    public void testScaleVec3() {
+        Matrix3#E# matrix = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(new Vec3#E#(2, 3, 4));
         TestUtil#E#.assertEquals(matrix, 2, 0, 0, 0, 3, 0, 0, 0, 4);
     }
 
@@ -215,20 +215,20 @@ public class Matrix3#E#Test {
     }
 
     @Test
-    public void testTransformVector3() {
-        Vector3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(new Vector3#E#(3, 2, 1));
+    public void testTransformVec3() {
+        Vec3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(new Vec3#E#(3, 2, 1));
         TestUtil#E#.assertEquals(vector, 10, 11, 1);
     }
 
     @Test
     public void testTransformDoubleComponents() {
-        Vector3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(3d, 2d, 1d);
+        Vec3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(3d, 2d, 1d);
         TestUtil#E#.assertEquals(vector, 10, 11, 1);
     }
 
     @Test
     public void testTransformFloatComponents() {
-        Vector3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(3, 2, 1);
+        Vec3#E# vector = new Matrix3#E#(1, 0, 0, 0, 1, 0, 0, 0, 1).scale(2, 3, 1).translate(4, 5).transform(3, 2, 1);
         TestUtil#E#.assertEquals(vector, 10, 11, 1);
     }
 
@@ -375,8 +375,8 @@ public class Matrix3#E#Test {
     }
 
     @Test
-    public void testCreateFromScalingVector3() {
-        Matrix3#E# matrix = Matrix3#E#.createScaling(new Vector3#E#(1, 2, 3));
+    public void testCreateFromScalingVec3() {
+        Matrix3#E# matrix = Matrix3#E#.createScaling(new Vec3#E#(1, 2, 3));
         TestUtil#E#.assertEquals(matrix, 1, 0, 0, 0, 2, 0, 0, 0, 3);
     }
 
@@ -393,10 +393,10 @@ public class Matrix3#E#Test {
     }
 
     @Test
-    public void testCreateTranslationVector2() {
-        Matrix3#E# matrix1 = Matrix3#E#.createTranslation(new Vector2#E#(1, 0));
+    public void testCreateTranslationVec2() {
+        Matrix3#E# matrix1 = Matrix3#E#.createTranslation(new Vec2#E#(1, 0));
         TestUtil#E#.assertEquals(matrix1, 1, 0, 1, 0, 1, 0, 0, 0, 1);
-        Matrix3#E# matrix2 = Matrix3#E#.createTranslation(new Vector2#E#(0, 1));
+        Matrix3#E# matrix2 = Matrix3#E#.createTranslation(new Vec2#E#(0, 1));
         TestUtil#E#.assertEquals(matrix2, 1, 0, 0, 0, 1, 1, 0, 0, 1);
     }
 

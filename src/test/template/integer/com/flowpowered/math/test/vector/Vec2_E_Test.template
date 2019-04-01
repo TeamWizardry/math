@@ -8,386 +8,408 @@ import org.junit.Test;
 import com.flowpowered.math.test.TestUtil#E#;
 import com.flowpowered.math.test.#EDecEquiTest#;
 import com.flowpowered.math.test.TestUtili;
-import com.flowpowered.math.vector.Vector2#E#;
-import com.flowpowered.math.vector.Vector3#E#;
-import com.flowpowered.math.vector.Vector4#E#;
-import com.flowpowered.math.vector.VectorN#E#;
+import com.flowpowered.math.vector.Vec2#E#;
+import com.flowpowered.math.vector.Vec3#E#;
+import com.flowpowered.math.vector.Vec4#E#;
+import com.flowpowered.math.vector.VecN#E#;
 
-public class Vector2#E#Test {
+public class Vec2#E#Test {
     @Test
     public void testEmptyConstructor() {
-        Vector2#E# vector = new Vector2#E#();
+        Vec2#E# vector = new Vec2#E#();
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 0);
     }
 
     @Test
-    public void testCopyVector2Constructor() {
-        Vector2#E# vector = new Vector2#E#(new Vector2#E#(0, 1));
+    public void testCopyVec2Constructor() {
+        Vec2#E# vector = new Vec2#E#(new Vec2#E#(0, 1));
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 1);
     }
 
     @Test
-    public void testCopyVector3Constructor() {
-        Vector2#E# vector = new Vector2#E#(new Vector3#E#(0, 1, 2));
+    public void testCopyVec3Constructor() {
+        Vec2#E# vector = new Vec2#E#(new Vec3#E#(0, 1, 2));
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 1);
     }
 
     @Test
-    public void testCopyVector4Constructor() {
-        Vector2#E# vector = new Vector2#E#(new Vector4#E#(0, 1, 2, 3));
+    public void testCopyVec4Constructor() {
+        Vec2#E# vector = new Vec2#E#(new Vec4#E#(0, 1, 2, 3));
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 1);
     }
 
     @Test
-    public void testCopyVectorNConstructor() {
-        Vector2#E# vector = new Vector2#E#(new VectorN#E#(0, 1, 2, 3, 4));
+    public void testCopyVecNConstructor() {
+        Vec2#E# vector = new Vec2#E#(new VecN#E#(0, 1, 2, 3, 4));
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 1);
     }
 
     @Test
     public void testDoubleComponentsConstructor() {
-        Vector2#E# vector = new Vector2#E#(0.5, 1.7);
+        Vec2#E# vector = new Vec2#E#(0.5, 1.7);
         TestUtil#E#.assertEquals(vector, (#e#) 0, (#e#) 1);
     }
 
     @Test
     public void test#ES#ComponentsConstructor() {
-        Vector2#E# vector = new Vector2#E#((#e#) 1, (#e#) 3);
+        Vec2#E# vector = new Vec2#E#((#e#) 1, (#e#) 3);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 3);
     }
 
     @Test
+    public void testPooledWholeNumberConstructor() {
+        Vec2#E# vector = Vec2#E#.createPooled(0, 0);
+        TestUtil#E#.assertEquals(vector, 0, 0);
+        Assert.assertSame(vector, Vec2#E#.createPooled(0, 0));
+
+        vector = Vec2#E#.createPooled(2, 5);
+        TestUtil#E#.assertEquals(vector, 2, 5);
+        Assert.assertSame(vector, Vec2#E#.createPooled(2, 5));
+    }
+
+    @Test
+    public void testPooledOutsideBoundsConstructor() {
+        Vec2#E# vector = Vec2#E#.createPooled(1000, 1000);
+        TestUtil#E#.assertEquals(vector, 1000, 1000);
+        Assert.assertNotSame(vector, Vec2#E#.createPooled(1000, 1000));
+
+        vector = Vec2#E#.createPooled(#EW#.MAX_VALUE, #EW#.MAX_VALUE);
+        TestUtil#E#.assertEquals(vector, #EW#.MAX_VALUE, #EW#.MAX_VALUE);
+        Assert.assertNotSame(vector, Vec2#E#.createPooled(#EW#.MAX_VALUE, #EW#.MAX_VALUE));
+    }
+
+    @Test
     public void testGetters() {
-        Vector2#E# vector = new Vector2#E#(1, 3);
+        Vec2#E# vector = new Vec2#E#(1, 3);
         TestUtil#E#.assertEquals(vector.getX(), (#e#) 1);
         TestUtil#E#.assertEquals(vector.getY(), (#e#) 3);
     }
 
     @Test
-    public void testVector2Addition() {
-        Vector2#E# vector = new Vector2#E#(1, 3).add(new Vector2#E#(5, -1));
+    public void testVec2Addition() {
+        Vec2#E# vector = new Vec2#E#(1, 3).add(new Vec2#E#(5, -1));
         TestUtil#E#.assertEquals(vector, (#e#) 6, (#e#) 2);
     }
 
     @Test
     public void testDoubleComponentsAddition() {
-        Vector2#E# vector = new Vector2#E#(1, 3).add(5.5, -1.5);
+        Vec2#E# vector = new Vec2#E#(1, 3).add(5.5, -1.5);
         TestUtil#E#.assertEquals(vector, (#e#) 6, (#e#) 1);
     }
 
     @Test
     public void test#ES#ComponentsAddition() {
-        Vector2#E# vector = new Vector2#E#(1, 3).add(5, -1);
+        Vec2#E# vector = new Vec2#E#(1, 3).add(5, -1);
         TestUtil#E#.assertEquals(vector, (#e#) 6, (#e#) 2);
     }
 
     @Test
-    public void testVector2Subtraction() {
-        Vector2#E# vector = new Vector2#E#(10, 5).sub(new Vector2#E#(13, 4));
+    public void testVec2Subtraction() {
+        Vec2#E# vector = new Vec2#E#(10, 5).sub(new Vec2#E#(13, 4));
         TestUtil#E#.assertEquals(vector, (#e#) -3, (#e#) 1);
     }
 
     @Test
     public void testDoubleComponentsSubtraction() {
-        Vector2#E# vector = new Vector2#E#(10, 5).sub(13, 4);
+        Vec2#E# vector = new Vec2#E#(10, 5).sub(13, 4);
         TestUtil#E#.assertEquals(vector, (#e#) -3, (#e#) 1);
     }
 
     @Test
     public void test#ES#ComponentsSubtraction() {
-        Vector2#E# vector = new Vector2#E#(10, 5).sub(13f, 4.5f);
+        Vec2#E# vector = new Vec2#E#(10, 5).sub(13f, 4.5f);
         TestUtil#E#.assertEquals(vector, (#e#) -3, (#e#) 1);
     }
 
     @Test
     public void testDoubleFactorMultiplication() {
-        Vector2#E# vector = new Vector2#E#(2, 3).mul(2.5);
+        Vec2#E# vector = new Vec2#E#(2, 3).mul(2.5);
         TestUtil#E#.assertEquals(vector, (#e#) 4, (#e#) 6);
     }
 
     @Test
     public void test#ES#FactorMultiplication() {
-        Vector2#E# vector = new Vector2#E#(2, 3).mul((#e#) 3);
+        Vec2#E# vector = new Vec2#E#(2, 3).mul((#e#) 3);
         TestUtil#E#.assertEquals(vector, (#e#) 6, (#e#) 9);
     }
 
     @Test
-    public void testVector2Multiplication() {
-        Vector2#E# vector = new Vector2#E#(2, 3).mul(new Vector2#E#(5, 2));
+    public void testVec2Multiplication() {
+        Vec2#E# vector = new Vec2#E#(2, 3).mul(new Vec2#E#(5, 2));
         TestUtil#E#.assertEquals(vector, (#e#) 10, (#e#) 6);
     }
 
     @Test
     public void testDoubleComponentsMultiplication() {
-        Vector2#E# vector = new Vector2#E#(2, 3).mul(1.5, 2.5);
+        Vec2#E# vector = new Vec2#E#(2, 3).mul(1.5, 2.5);
         TestUtil#E#.assertEquals(vector, (#e#) 2, (#e#) 6);
     }
 
     @Test
     public void test#ES#ComponentsMultiplication() {
-        Vector2#E# vector = new Vector2#E#(2, 3).mul((#e#) 5, (#e#) 2);
+        Vec2#E# vector = new Vec2#E#(2, 3).mul((#e#) 5, (#e#) 2);
         TestUtil#E#.assertEquals(vector, (#e#) 10, (#e#) 6);
     }
 
     @Test
     public void testDoubleFactorDivision() {
-        Vector2#E# vector = new Vector2#E#(2, 5).div(2d);
+        Vec2#E# vector = new Vec2#E#(2, 5).div(2d);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2);
     }
 
     @Test
     public void test#ES#FactorDivision() {
-        Vector2#E# vector = new Vector2#E#(2, 6).div((#e#) 2);
+        Vec2#E# vector = new Vec2#E#(2, 6).div((#e#) 2);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 3);
     }
 
     @Test
-    public void testVector2Division() {
-        Vector2#E# vector = new Vector2#E#(2, 7).div(new Vector2#E#(2, 3));
+    public void testVec2Division() {
+        Vec2#E# vector = new Vec2#E#(2, 7).div(new Vec2#E#(2, 3));
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2);
     }
 
     @Test
     public void testDoubleComponentsDivision() {
-        Vector2#E# vector = new Vector2#E#(2, 6).div(2d, 2.5);
+        Vec2#E# vector = new Vec2#E#(2, 6).div(2d, 2.5);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 3);
     }
 
     @Test
     public void test#ES#ComponentsDivision() {
-        Vector2#E# vector = new Vector2#E#(2, 7).div((#e#) 2, (#e#) 3);
+        Vec2#E# vector = new Vec2#E#(2, 7).div((#e#) 2, (#e#) 3);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2);
     }
 
     @Test
-    public void testVector2DotProduct() {
-        #e# f = new Vector2#E#(2, 3).dot(new Vector2#E#(4, 5));
+    public void testVec2DotProduct() {
+        #e# f = new Vec2#E#(2, 3).dot(new Vec2#E#(4, 5));
         TestUtil#E#.assertEquals(f, (#e#) 23);
     }
 
     @Test
     public void testDoubleComponentsDotProduct() {
-        #e# f = new Vector2#E#(2, 3).dot(4d, 5d);
+        #e# f = new Vec2#E#(2, 3).dot(4d, 5d);
         TestUtil#E#.assertEquals(f, (#e#) 23);
     }
 
     @Test
     public void test#ES#ComponentsDotProduct() {
-        #e# f = new Vector2#E#(2, 3).dot(4, 5);
+        #e# f = new Vec2#E#(2, 3).dot(4, 5);
         TestUtil#E#.assertEquals(f, (#e#) 23);
     }
 
     @Test
-    public void testVector2Project() {
-        Vector2#E# vector = new Vector2#E#(20, 30).project(new Vector2#E#(10, 10));
+    public void testVec2Project() {
+        Vec2#E# vector = new Vec2#E#(20, 30).project(new Vec2#E#(10, 10));
         TestUtil#E#.assertEquals(vector, 25, 25);
     }
 
     @Test
     public void testDoubleComponentsProject() {
-        Vector2#E# vector = new Vector2#E#(20, 30).project(10d, 10d);
+        Vec2#E# vector = new Vec2#E#(20, 30).project(10d, 10d);
         TestUtil#E#.assertEquals(vector, 25, 25);
     }
 
     @Test
     public void testFloatComponentsProject() {
-        Vector2#E# vector = new Vector2#E#(20, 30).project(10, 10);
+        Vec2#E# vector = new Vec2#E#(20, 30).project(10, 10);
         TestUtil#E#.assertEquals(vector, 25, 25);
     }
 
     @Test
     public void testRaiseTo#ES#Power() {
-        Vector2#E# vector = new Vector2#E#(2, 6).pow((#e#) 2);
+        Vec2#E# vector = new Vec2#E#(2, 6).pow((#e#) 2);
         TestUtil#E#.assertEquals(vector, (#e#) 4, (#e#) 36);
     }
 
     @Test
     public void testRaiseToDoublePower() {
-        Vector2#E# vector = new Vector2#E#(2, 6).pow(2d);
+        Vec2#E# vector = new Vec2#E#(2, 6).pow(2d);
         TestUtil#E#.assertEquals(vector, (#e#) 4, (#e#) 36);
     }
 
     @Test
     public void testAbsolute() {
-        Vector2#E# vector1 = new Vector2#E#(-2, -6).abs();
+        Vec2#E# vector1 = new Vec2#E#(-2, -6).abs();
         TestUtil#E#.assertEquals(vector1, (#e#) 2, (#e#) 6);
-        Vector2#E# vector2 = new Vector2#E#(2, 6).abs();
-        TestUtil#E#.assertEquals(vector2, (#e#) 2, (#e#) 6);
+        Vec2#E# Vec2 = new Vec2#E#(2, 6).abs();
+        TestUtil#E#.assertEquals(Vec2, (#e#) 2, (#e#) 6);
     }
 
     @Test
     public void testNegate() {
-        Vector2#E# vector = new Vector2#E#(2, -6).negate();
+        Vec2#E# vector = new Vec2#E#(2, -6).negate();
         TestUtil#E#.assertEquals(vector, (#e#) -2, (#e#) 6);
     }
 
     @Test
-    public void testVector2Minimum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).min(new Vector2#E#(3, 4));
+    public void testVec2Minimum() {
+        Vec2#E# vector = new Vec2#E#(2, 6).min(new Vec2#E#(3, 4));
         TestUtil#E#.assertEquals(vector, (#e#) 2, (#e#) 4);
     }
 
     @Test
     public void testDoubleComponentsMinimum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).min(3d, 4d);
+        Vec2#E# vector = new Vec2#E#(2, 6).min(3d, 4d);
         TestUtil#E#.assertEquals(vector, (#e#) 2, (#e#) 4);
     }
 
     @Test
     public void test#ES#ComponentsMinimum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).min((#e#) 3, (#e#) 4);
+        Vec2#E# vector = new Vec2#E#(2, 6).min((#e#) 3, (#e#) 4);
         TestUtil#E#.assertEquals(vector, (#e#) 2, (#e#) 4);
     }
 
     @Test
-    public void testVector2Maximum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).max(new Vector2#E#(3, 4));
+    public void testVec2Maximum() {
+        Vec2#E# vector = new Vec2#E#(2, 6).max(new Vec2#E#(3, 4));
         TestUtil#E#.assertEquals(vector, (#e#) 3, (#e#) 6);
     }
 
     @Test
     public void testDoubleComponentsMaximum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).max(3d, 4d);
+        Vec2#E# vector = new Vec2#E#(2, 6).max(3d, 4d);
         TestUtil#E#.assertEquals(vector, (#e#) 3, (#e#) 6);
     }
 
     @Test
     public void test#ES#ComponentsMaximum() {
-        Vector2#E# vector = new Vector2#E#(2, 6).max((#e#) 3, (#e#) 4);
+        Vec2#E# vector = new Vec2#E#(2, 6).max((#e#) 3, (#e#) 4);
         TestUtil#E#.assertEquals(vector, (#e#) 3, (#e#) 6);
     }
 
     @Test
-    public void testVector2DistanceSquared() {
-        #e# f = new Vector2#E#(2, 3).distanceSquared(new Vector2#E#(4, 5));
+    public void testVec2DistanceSquared() {
+        #e# f = new Vec2#E#(2, 3).distanceSquared(new Vec2#E#(4, 5));
         TestUtil#E#.assertEquals(f, (#e#) 8);
     }
 
     @Test
     public void testDoubleComponentsDistanceSquared() {
-        #e# f = new Vector2#E#(2, 3).distanceSquared(4d, 5d);
+        #e# f = new Vec2#E#(2, 3).distanceSquared(4d, 5d);
         TestUtil#E#.assertEquals(f, (#e#) 8);
     }
 
     @Test
     public void test#ES#ComponentsDistanceSquared() {
-        #e# f = new Vector2#E#(2, 3).distanceSquared((#e#) 4, (#e#) 5);
+        #e# f = new Vec2#E#(2, 3).distanceSquared((#e#) 4, (#e#) 5);
         TestUtil#E#.assertEquals(f, (#e#) 8);
     }
 
     @Test
-    public void testVector2Distance() {
-        #EDecEqui# f = new Vector2#E#(4, 6).distance(new Vector2#E#(7, 2));
+    public void testVec2Distance() {
+        #EDecEqui# f = new Vec2#E#(4, 6).distance(new Vec2#E#(7, 2));
         #EDecEquiTest#.assertEquals(f, (#e#) 5);
     }
 
     @Test
     public void testDoubleComponentsDistance() {
-        #EDecEqui# f = new Vector2#E#(4, 6).distance(7d, 2d);
+        #EDecEqui# f = new Vec2#E#(4, 6).distance(7d, 2d);
         #EDecEquiTest#.assertEquals(f, (#e#) 5);
     }
 
     @Test
     public void test#ES#ComponentsDistance() {
-        #EDecEqui# f = new Vector2#E#(4, 6).distance((#e#) 7, (#e#) 2);
+        #EDecEqui# f = new Vec2#E#(4, 6).distance((#e#) 7, (#e#) 2);
         #EDecEquiTest#.assertEquals(f, (#e#) 5);
     }
 
     @Test
     public void testLength() {
-        #EDecEqui# f = new Vector2#E#(3, 4).length();
+        #EDecEqui# f = new Vec2#E#(3, 4).length();
         #EDecEquiTest#.assertEquals(f, (#e#) 5);
     }
 
     @Test
     public void testLengthSquared() {
-        #e# f = new Vector2#E#(3, 4).lengthSquared();
+        #e# f = new Vec2#E#(3, 4).lengthSquared();
         TestUtil#E#.assertEquals(f, (#e#) 25);
     }
 
     @Test
     public void testGetMinAxis() {
-        Vector2#E# vector1 = new Vector2#E#(1, 2);
+        Vec2#E# vector1 = new Vec2#E#(1, 2);
         TestUtili.assertEquals(vector1.getMinAxis(), 0);
-        Vector2#E# vector2 = new Vector2#E#(2, 1);
-        TestUtili.assertEquals(vector2.getMinAxis(), 1);
+        Vec2#E# Vec2 = new Vec2#E#(2, 1);
+        TestUtili.assertEquals(Vec2.getMinAxis(), 1);
     }
 
     @Test
     public void testGetMaxAxis() {
-        Vector2#E# vector1 = new Vector2#E#(2, 1);
+        Vec2#E# vector1 = new Vec2#E#(2, 1);
         TestUtili.assertEquals(vector1.getMaxAxis(), 0);
-        Vector2#E# vector2 = new Vector2#E#(1, 2);
-        TestUtili.assertEquals(vector2.getMaxAxis(), 1);
+        Vec2#E# Vec2 = new Vec2#E#(1, 2);
+        TestUtili.assertEquals(Vec2.getMaxAxis(), 1);
     }
 
     @Test
-    public void testConvertToVector3DefaultZ() {
-        Vector3#E# vector = new Vector2#E#(1, 2).toVector3();
+    public void testConvertToVec3DefaultZ() {
+        Vec3#E# vector = new Vec2#E#(1, 2).toVec3();
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 0);
     }
 
     @Test
-    public void testConvertToVector3#ES#Z() {
-        Vector3#E# vector = new Vector2#E#(1, 2).toVector3((#e#) 3);
+    public void testConvertToVec3#ES#Z() {
+        Vec3#E# vector = new Vec2#E#(1, 2).toVec3((#e#) 3);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 3);
     }
 
     @Test
-    public void testConvertToVector3DoubleZ() {
-        Vector3#E# vector = new Vector2#E#(1, 2).toVector3(3d);
+    public void testConvertToVec3DoubleZ() {
+        Vec3#E# vector = new Vec2#E#(1, 2).toVec3(3d);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 3);
     }
 
     @Test
-    public void testConvertToVector4DefaultZW() {
-        Vector4#E# vector = new Vector2#E#(1, 2).toVector4();
+    public void testConvertToVec4DefaultZW() {
+        Vec4#E# vector = new Vec2#E#(1, 2).toVec4();
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 0, (#e#) 0);
     }
 
     @Test
-    public void testConvertToVector4#ES#ZW() {
-        Vector4#E# vector = new Vector2#E#(1, 2).toVector4((#e#) 3, (#e#) 4);
+    public void testConvertToVec4#ES#ZW() {
+        Vec4#E# vector = new Vec2#E#(1, 2).toVec4((#e#) 3, (#e#) 4);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 3, (#e#) 4);
     }
 
     @Test
-    public void testConvertToVector4DoubleZW() {
-        Vector4#E# vector = new Vector2#E#(1, 2).toVector4(3d, 4d);
+    public void testConvertToVec4DoubleZW() {
+        Vec4#E# vector = new Vec2#E#(1, 2).toVec4(3d, 4d);
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2, (#e#) 3, (#e#) 4);
     }
 
     @Test
-    public void testConvertToVectorN() {
-        VectorN#E# vector = new Vector2#E#(1, 2).toVectorN();
+    public void testConvertToVecN() {
+        VecN#E# vector = new Vec2#E#(1, 2).toVecN();
         TestUtil#E#.assertEquals(vector, (#e#) 1, (#e#) 2);
     }
 
     @Test
     public void testConvertToArray() {
-        #e#[] array = new Vector2#E#(1, 2).toArray();
+        #e#[] array = new Vec2#E#(1, 2).toArray();
         TestUtil#E#.assertEquals(array, (#e#) 1, (#e#) 2);
     }
 
     @Test
     public void testComparison() {
-        int c1 = new Vector2#E#(10, 20).compareTo(new Vector2#E#(20, 20));
+        int c1 = new Vec2#E#(10, 20).compareTo(new Vec2#E#(20, 20));
         Assert.assertTrue(c1 < 0);
-        int c2 = new Vector2#E#(10, 20).compareTo(new Vector2#E#(10, 20));
+        int c2 = new Vec2#E#(10, 20).compareTo(new Vec2#E#(10, 20));
         Assert.assertTrue(c2 == 0);
-        int c3 = new Vector2#E#(10, 20).compareTo(new Vector2#E#(10, 10));
+        int c3 = new Vec2#E#(10, 20).compareTo(new Vec2#E#(10, 10));
         Assert.assertTrue(c3 > 0);
     }
 
     @Test
     public void testEquals() {
-        Assert.assertTrue(new Vector2#E#(122, 43).equals(new Vector2#E#(122, 43)));
-        Assert.assertFalse(new Vector2#E#(122, 43).equals(new Vector2#E#(378, 95)));
+        Assert.assertTrue(new Vec2#E#(122, 43).equals(new Vec2#E#(122, 43)));
+        Assert.assertFalse(new Vec2#E#(122, 43).equals(new Vec2#E#(378, 95)));
     }
 
     @Test
     public void testCloning() {
-        Vector2#E# vector = new Vector2#E#(3, 2);
+        Vec2#E# vector = new Vec2#E#(3, 2);
         Assert.assertEquals(vector, vector.clone());
     }
 }

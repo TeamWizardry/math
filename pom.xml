@@ -175,6 +175,7 @@
                                         <Overload1>float</Overload1>
                                         <Overload2>long</Overload2>
                                         <S>Int</S>
+                                        <W>Integer</W>
                                         <FloorFunc>GenericMath.floor</FloorFunc>
                                         <DecEqui>float</DecEqui>
                                     </placeholders>
@@ -190,6 +191,7 @@
                                         <Overload1>float</Overload1>
                                         <Overload2>int</Overload2>
                                         <S>Long</S>
+                                        <W>Long</W>
                                         <FloorFunc>GenericMath.floorl</FloorFunc>
                                         <DecEqui>double</DecEqui>
                                     </placeholders>
@@ -215,6 +217,7 @@
                                     <placeholders>
                                         <Overload>long</Overload>
                                         <S>Int</S>
+                                        <W>Integer</W>
                                         <DecEqui>float</DecEqui>
                                         <DecEquiTest>TestUtilf</DecEquiTest>
                                     </placeholders>
@@ -228,6 +231,7 @@
                                     <placeholders>
                                         <Overload>int</Overload>
                                         <S>Long</S>
+                                        <W>Long</W>
                                         <DecEqui>double</DecEqui>
                                         <DecEquiTest>TestUtild</DecEquiTest>
                                     </placeholders>
@@ -255,6 +259,7 @@
                                         <Overload1>int</Overload1>
                                         <Overload2>long</Overload2>
                                         <S>Float</S>
+                                        <W>Float</W>
                                         <eps>GenericMath.FLT_EPSILON</eps>
                                     </placeholders>
                                 </type>
@@ -269,6 +274,7 @@
                                         <Overload1>int</Overload1>
                                         <Overload2>long</Overload2>
                                         <S>Double</S>
+                                        <W>Double</W>
                                         <eps>GenericMath.DBL_EPSILON</eps>
                                     </placeholders>
                                 </type>
@@ -295,6 +301,7 @@
                                         <Overload1>int</Overload1>
                                         <Overload2>long</Overload2>
                                         <S>Float</S>
+                                        <W>Float</W>
                                         <eps>GenericMath.FLT_EPSILON</eps>
                                         <teps>0.00001f</teps>
                                     </placeholders>
@@ -310,6 +317,7 @@
                                         <Overload1>int</Overload1>
                                         <Overload2>long</Overload2>
                                         <S>Double</S>
+                                        <W>Double</W>
                                         <eps>GenericMath.DBL_EPSILON</eps>
                                         <teps>0.0000008</teps>
                                     </placeholders>

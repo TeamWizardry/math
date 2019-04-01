@@ -7,8 +7,8 @@ import com.flowpowered.math.GenericMath;
 import com.flowpowered.math.TrigMath;
 import com.flowpowered.math.imaginary.Complex#E#;
 import com.flowpowered.math.imaginary.Quaternion#E#;
-import com.flowpowered.math.vector.Vector3#E#;
-import com.flowpowered.math.vector.VectorN#E#;
+import com.flowpowered.math.vector.Vec3#E#;
+import com.flowpowered.math.vector.VecN#E#;
 
 public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
     private static final long serialVersionUID = 1;
@@ -81,9 +81,9 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
     }
 
     @Override
-    public VectorN#E# getRow(int row) {
+    public VecN#E# getRow(int row) {
         final int size = size();
-        final VectorN#E# d = new VectorN#E#(size);
+        final VecN#E# d = new VecN#E#(size);
         for (int col = 0; col < size; col++) {
             d.set(col, get(row, col));
         }
@@ -91,9 +91,9 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
     }
 
     @Override
-    public VectorN#E# getColumn(int col) {
+    public VecN#E# getColumn(int col) {
         final int size = size();
-        final VectorN#E# d = new VectorN#E#(size);
+        final VecN#E# d = new VecN#E#(size);
         for (int row = 0; row < size; row++) {
             d.set(row, get(row, col));
         }
@@ -238,7 +238,7 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         return d;
     }
 
-    public MatrixN#E# translate(VectorN#E# v) {
+    public MatrixN#E# translate(VecN#E# v) {
         return translate(v.toArray());
     }
 
@@ -246,7 +246,7 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         return createTranslation(v).mul(this);
     }
 
-    public MatrixN#E# scale(VectorN#E# v) {
+    public MatrixN#E# scale(VecN#E# v) {
         return scale(v.toArray());
     }
 
@@ -262,16 +262,16 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         return createRotation(size(), rot).mul(this);
     }
 
-    public VectorN#E# transform(VectorN#E# v) {
+    public VecN#E# transform(VecN#E# v) {
         return transform(v.toArray());
     }
 
-    public VectorN#E# transform(#e#... vec) {
+    public VecN#E# transform(#e#... vec) {
         final int size = size();
         if (size != vec.length) {
             throw new IllegalArgumentException("Matrix and vector sizes must be the same");
         }
-        final VectorN#E# d = new VectorN#E#(size);
+        final VecN#E# d = new VecN#E#(size);
         for (int row = 0; row < size; row++) {
             #e# dot = 0;
             for (int col = 0; col < size; col++) {
@@ -508,7 +508,7 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         return new MatrixN#E#(this);
     }
 
-    public static MatrixN#E# createScaling(VectorN#E# v) {
+    public static MatrixN#E# createScaling(VecN#E# v) {
         return createScaling(v.toArray());
     }
 
@@ -521,7 +521,7 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         return m;
     }
 
-    public static MatrixN#E# createTranslation(VectorN#E# v) {
+    public static MatrixN#E# createTranslation(VecN#E# v) {
         return createTranslation(v.toArray());
     }
 
@@ -574,14 +574,14 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
      * @param up The "up" vector
      * @return A rotational transform that corresponds to a camera looking at the given point
      */
-    public static MatrixN#E# createLookAt(int size, Vector3#E# eye, Vector3#E# at, Vector3#E# up) {
+    public static MatrixN#E# createLookAt(int size, Vec3#E# eye, Vec3#E# at, Vec3#E# up) {
         if (size < 4) {
             throw new IllegalArgumentException("Minimum matrix size is 4");
         }
-        final Vector3#E# f = at.sub(eye).normalize();
+        final Vec3#E# f = at.sub(eye).normalize();
         up = up.normalize();
-        final Vector3#E# s = f.cross(up).normalize();
-        final Vector3#E# u = s.cross(f).normalize();
+        final Vec3#E# s = f.cross(up).normalize();
+        final Vec3#E# u = s.cross(f).normalize();
         final MatrixN#E# mat = new MatrixN#E#(size);
         mat.set(0, 0, s.getX());
         mat.set(0, 1, s.getY());
@@ -592,7 +592,7 @@ public class MatrixN#E# implements Matrix#E#, Serializable, Cloneable {
         mat.set(2, 0, -f.getX());
         mat.set(2, 1, -f.getY());
         mat.set(2, 2, -f.getZ());
-        return mat.translate(eye.mul(-1).toVectorN());
+        return mat.translate(eye.mul(-1).toVecN());
     }
 
     /**
